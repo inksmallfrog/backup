@@ -1,0 +1,1 @@
+objs/lexer_table.o /home/inksmallfrog/code/c/compiler/compiler_learning1/build/lexer/deps/lexer_table.dep: lexer_table.c ../../inc/lexer/lexer_table.h

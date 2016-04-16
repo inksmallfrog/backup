@@ -1,0 +1,24 @@
+#ifndef _INKSMALLFROG_COMPILER_LEARNING_TOKEN_
+#define _INKSMALLFROG_COMPILER_LEARNING_TOKEN_
+
+#define _MAX_TOKEN_LENGTH_ 128
+
+typedef enum{
+  TokenType_Integer,
+  TokenType_Float,
+  TokenType_Operator,
+  TokenType_Id,
+  TokenType_Lineend,
+  TokenType_Unknown
+} TokenType;
+
+typedef struct{
+  char name[_MAX_TOKEN_LENGTH_];
+  TokenType type;
+  float value;
+} Token;
+
+extern Token CURRENT_TOKEN;
+extern int CURRENT_LINE_NUMBER;
+
+#endif

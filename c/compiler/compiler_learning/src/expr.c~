@@ -1,0 +1,73 @@
+#include "expr.h"
+#include "lexer.h"
+#include "token.h"
+#include <stdio.h>
+
+
+int expr(){
+  if(0 == term()){
+    /*错误，非正确的表达式
+     *
+     */
+    printf("error in expr\n");
+    return 0;
+  }
+  while(CURRENT_TOKEN.name[0] == '+' || CURRENT_TOKEN.name[0] == '-'){
+    char token = CURRENT_TOKEN.name[0];
+    lexer_getch();
+    if(0 == term()){
+      return 0;      
+    }
+    printf("%c", token);
+  }
+  return 1;
+}
+
+int term(){
+  if(0 == factor()){
+    /*错误，非正确的项
+     *
+     */
+    printf("error in term\n");
+    return 0;
+  }
+  while(CURRENT_TOKEN.name[0] == '*' || CURRENT_TOKEN.name[0] == '/'){
+    char token = CURRENT_TOKEN.name[0];
+    lexer_getch();
+    if(0 == factor()){
+      return 0;
+    }
+    printf("%c", token);
+  }
+  return 1;
+}
+
+int factor(){
+  if(CURRENT_TOKEN.type == TokenType_Float){
+    printf("%f", CURRENT_TOKEN.value);
+    lexer_getch();
+    return 1;
+  }
+  else if(CURRENT_TOKEN.type == TokenType_Integer){
+    printf("%d", (int)CURRENT_TOKEN.value);
+    lexer_getch();
+    return 1;
+  }
+  else if(CURRENT_TOKEN.type == TokenType_Lbrace){
+    lexer_getch();
+    if(0 == expr()){
+      return 0;
+    }
+    if(CURRENT_TOKEN.type == TokenType_Rbrace){
+      return 1;
+    }
+    else{
+      /*括号不匹配
+       *
+       */
+      printf("括号不匹配\n");
+      return 0;
+    }
+  }
+  return 0;
+}

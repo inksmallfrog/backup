@@ -1,0 +1,3 @@
+objs/lexer_switch.o /home/inksmallfrog/code/c/compiler/compiler_learning1/build/lexer/deps/lexer_switch.dep: lexer_switch.c ../../inc/lexer/lexer.h \
+ ../../inc/lexer/../share/util.h ../../inc/lexer/lexer_wordtype.h \
+ ../../inc/lexer/lexer_table.h
